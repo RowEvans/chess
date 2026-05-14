@@ -5,6 +5,12 @@ pygame.init()
 screen = pygame.display.set_mode((800, 600))
 pygame.display.set_caption("Chess")
 
+font = pygame.font.Font(None, 16)
+
+#ranks
+letters = "abcdefgh"
+
+#colors
 black = (0, 0, 0)
 white = (255, 255, 255)
 brown = (176, 135, 98)
@@ -28,9 +34,26 @@ def drawBoard(surface):
                 color = brown
 
             pygame.draw.rect(surface, color, (BOARD_X + i, BOARD_Y + j, SQUARE_WIDTH, SQUARE_HEIGHT))
+    
+    #add ranks
+    for i in range(8):
+        if (i % 2) == 0:
+            color = tan
+        else:
+            color = brown
 
+        text = font.render(f"{letters[i]}", True, color)
+        text_rect = text.get_rect(center=((BOARD_X + 8 + (i * 50)), (BOARD_Y + BOARD_HEIGHT - 8)))
+        surface.blit(text, text_rect)
 
+        text2 = font.render(f"{i + 1}", True, color)
+        text2_rect = text2.get_rect(center=((BOARD_X + 8), (BOARD_Y + BOARD_HEIGHT - ((i + 1) * 50) + 8)))
+        surface.blit(text2, text2_rect)
 
+#pieces
+
+def drawPieces(surface):
+    pass
 
 running = True
 while running:
