@@ -51,18 +51,57 @@ def drawBoard(surface):
         surface.blit(text2, text2_rect)
 
 #pieces
+blackBoard = [
+    ['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'],
+    ['P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'],
+    ['-', '-', '-', '-', '-', '-', '-', '-'],
+    ['-', '-', '-', '-', '-', '-', '-', '-'],
+    ['-', '-', '-', '-', '-', '-', '-', '-'],
+    ['-', '-', '-', '-', '-', '-', '-', '-'],
+    ['-', '-', '-', '-', '-', '-', '-', '-'],
+    ['-', '-', '-', '-', '-', '-', '-', '-'],
+    ]
+
+whiteBoard = [
+    ['-', '-', '-', '-', '-', '-', '-', '-'],
+    ['-', '-', '-', '-', '-', '-', '-', '-'],
+    ['-', '-', '-', '-', '-', '-', '-', '-'],
+    ['-', '-', '-', '-', '-', '-', '-', '-'],
+    ['-', '-', '-', '-', '-', '-', '-', '-'],
+    ['-', '-', '-', '-', '-', '-', '-', '-'],
+    ['P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'],
+    ['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'],
+    ]
+piece_font = pygame.font.Font(None, 24)
 
 def drawPieces(surface):
-    pass
+    for i in range(8):
+        for j in range(8):
+            if blackBoard[i][j] == '-':
+                continue
+            text = piece_font.render(f"{blackBoard[i][j]}", True, black)
+            text_rect = text.get_rect(center=(BOARD_X + 25 + (j * 50), (BOARD_Y + 25 + (i * 50))))
+            surface.blit(text, text_rect)
+
+    for i in range(8):
+        for j in range(8):
+            if whiteBoard[i][j] == '-':
+                continue
+            text = piece_font.render(f"{whiteBoard[i][j]}", True, white)
+            text_rect = text.get_rect(center=((BOARD_X + 25 + (j * 50)), (BOARD_Y + 25 + (i * 50))))
+            surface.blit(text, text_rect)
+    
 
 running = True
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+            
     screen.fill(black)
     
     drawBoard(screen)
+    drawPieces(screen)
 
     pygame.display.flip()
 
